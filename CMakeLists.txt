@@ -14,14 +14,9 @@ else()
     add_definitions(-D_WIN32_WINNT=0x600)
 endif()
 
-set(LIB_PREFIX "/usr/local/lib")
-
 find_package(Threads REQUIRED)
 
-find_package(Libwebsockets)
-set(WEBSOCKET_LIB "${LIB_PREFIX}/libwebsockets.a")
-
-find_package(OpenSSL REQUIRED)
+find_package(libwebsockets REQUIRED PATHS "${PROJECT_SOURCE_DIR}/build")
 
 set (LIBS
         src/libs/callback.h
@@ -38,8 +33,7 @@ set (LIBS
 
 add_executable(websocket-client main.cpp ${LIBS})
 
-target_link_libraries(websocket-client
-        ${WEBSOCKET_LIB}
-        ${OPENSSL_LIBRARIES}
-        ${CMAKE_THREAD_LIBS_INIT}
-)
+target_link_libraries(websocket-client libwebsockets::libwebsockets)
+
+# cmake . -DCMAKE_BUILD_TYPE=Release
+# cmake --build .

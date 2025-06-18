@@ -86,7 +86,8 @@ bool websocket_client::connect() noexcept {
 
     if (port_ == 443) {
         request_->cci.protocol = "wss";
-        request_->cci.ssl_connection = LCCSCF_USE_SSL | LCCSCF_PRIORITIZE_READS;
+        // request_->cci.ssl_connection = LCCSCF_USE_SSL | LCCSCF_PRIORITIZE_READS;
+        request_->cci.ssl_connection = LCCSCF_USE_SSL;  //  | LCCSCF_PRIORITIZE_READS;
     }
 
     auto &socket_info = request_->socket_info;
