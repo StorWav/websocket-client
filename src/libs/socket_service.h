@@ -87,7 +87,8 @@ public:
         }
 
         if (context_) {
-            lws_context_destroy(context_);
+            // HACK: https://github.com/warmcat/libwebsockets/issues/3288
+            // lws_context_destroy(context_);
             context_ = nullptr;
         }
     }
